@@ -20,7 +20,7 @@ echo "+------------------------------------------------------------------------+
 echo "|   请注意：此脚本仅供学习和研究使用，请于下载后24h删除。否则与作者无关！|"
 
 # 初始化Burp Suite Pro的安装目录和文件名
-BURP_DIR="/ot/BurpSuitePro/"
+BURP_DIR="/opt/BurpSuitePro/"
 BURP="BurpSuitePro"
 BURP_Loder="BURP_Loder"
 
