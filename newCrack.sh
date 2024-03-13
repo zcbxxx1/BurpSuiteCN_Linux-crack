@@ -87,7 +87,7 @@ while true; do
                 # sudo chmod 755 /opt/BurpSuitePro/plugins
                 # sudo chmod 755 /opt/BurpSuitePro/config
                 sudo rm -rf CrackFiles
-                ls -lah "${BURP_DIR}${BURP}"
+                ls -lah "${BURP_DIR}"
             else
                 echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
                 break
@@ -117,7 +117,7 @@ while true; do
             echo "$fav ...."
             if [ -f "${BURP_DIR}${BURP}" ]; then
                 sudo sed -i '10，25d' "${BURP_DIR}"BurpSuitePro.vmoptions
-                sudo echo -e "--add-opens=java.desktop/javax.swing=ALL-UNNAMED\n--add-opens=java.base/java.lang=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED\n-javaagent:${BURP_Loder}=loader,han\n-Xmx2048m" | sudo tee -a "${BURP_DIR}${BURP}"BurpSuitePro.vmoptions
+                sudo echo -e "--add-opens=java.desktop/javax.swing=ALL-UNNAMED\n--add-opens=java.base/java.lang=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED\n-javaagent:${BURP_Loder}=loader,han\n-Xmx2048m" | sudo tee -a "${BURP_DIR}"BurpSuitePro.vmoptions
             else
                 echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
                 break
