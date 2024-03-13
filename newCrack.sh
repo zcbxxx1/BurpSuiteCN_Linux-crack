@@ -43,6 +43,13 @@ while true; do
     fi
 done
 
+Version=$(curl -L -s -H 'Accept: application/json' "https://portswigger.net/burp/releases/data?previousLastId=-1&lastId=-1&pageSize=3" | sed -n 's/.*"ProductPlatformLabel":"Linux (x64)".*"Version":"\([^"]*\)".*/\1/p')
+Link="https://portswigger-cdn.net/burp/releases/download?product=pro&version=$Version&type=Linux"
+# echo ${Link}
+Version=${Version//./_}
+BpName="burpsuite_pro_linux_v$Version.sh"
+
+
 PS3='输入您的选择: '
 foods=("官方下载" "官方安装" "准备破解补丁" "设置英文版" "设置汉化版" "开始破解" "完全卸载" "退出安装..")
 while true; do
@@ -50,12 +57,7 @@ while true; do
         case $fav in
         "官方下载")
             echo "$fav ...."
-            Version=$(curl -L -s -H 'Accept: application/json' "https://portswigger.net/burp/releases/data?previousLastId=-1&lastId=-1&pageSize=3" | sed -n 's/.*"ProductPlatformLabel":"Linux (x64)".*"Version":"\([^"]*\)".*/\1/p')
             echo "当前最新版本为 $Version，正在尝试下载"
-            Link="https://portswigger-cdn.net/burp/releases/download?product=pro&version=$Version&type=Linux"
-            # echo ${Link}
-            Version=${Version//./_}
-            BpName="burpsuite_pro_linux_v$Version.sh"
             curl "$Link" -o "$BpName"
             echo "下载完成，文件名为 $BpName"
             sleep 2
