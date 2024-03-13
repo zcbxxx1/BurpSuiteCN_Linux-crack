@@ -44,7 +44,7 @@ while true; do
 done
 
 PS3='输入您的选择: '
-foods=("官方下载" "官方安装" "准备破解补丁" "设置英文版" "设置汉化版" "开始破解" "退出安装..")
+foods=("官方下载" "官方安装" "准备破解补丁" "设置英文版" "设置汉化版" "开始破解" "完全卸载" "退出安装..")
 while true; do
     select fav in "${foods[@]}"; do
         case $fav in
@@ -86,7 +86,7 @@ while true; do
                 sudo chmod 644 "${BURP_DIR}${BURP_Loder}"
                 # sudo chmod 755 /opt/BurpSuitePro/plugins
                 # sudo chmod 755 /opt/BurpSuitePro/config
-                sudo rm -rf CrackFiles
+                # sudo rm -rf CrackFiles
                 ls -lah "${BURP_DIR}"
             else
                 echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
@@ -121,6 +121,20 @@ while true; do
                 "${BURP_DIR}${BURP}"
             else
                 echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
+                break
+            fi
+            ;;
+        "完全卸载")
+            echo "$fav ...."
+            echo "是否卸载 Burp (包括插件、个人配置等，将会被完全清除) [Y/n]"
+            read -r INSTALL_CHOICE
+            if [ "$INSTALL_CHOICE" = "n" ] || [ "$INSTALL_CHOICE" = "N" ]; then
+                echo "取消卸载！"
+                break
+            fi
+            if [ -z "$INSTALL_CHOICE" ] || [ "$INSTALL_CHOICE" = "Y" ] || [ "$INSTALL_CHOICE" = "y" ]; then
+                sudo "${BURP_DIR}"uninstall
+                sudo rm -rf "${BURP_DIR}"
                 break
             fi
             ;;
