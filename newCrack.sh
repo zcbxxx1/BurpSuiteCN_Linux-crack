@@ -22,7 +22,7 @@ echo "|   请注意：此脚本仅供学习和研究使用，请于下载后24h�
 # 初始化Burp Suite Pro的安装目录和文件名
 BURP_DIR="/opt/BurpSuitePro/"
 BURP="BurpSuitePro"
-BURP_Loder="BURP_Loder"
+BURP_Loder="burpsuitloader-3.7.17-all.jar"
 
 # 使用循环检测BurpSuitePro文件是否存在
 while true; do
@@ -82,8 +82,8 @@ while true; do
         "准备破解补丁")
             echo "$fav ...."
             if [ -f "${BURP_DIR}${BURP}" ]; then
-                sudo cp -r CrackFiles/* "${BURP_DIR}${BURP}"
-                sudo chmod 644 "${BURP_DIR}${BURP}"ja-netfilter.jar
+                sudo cp -r CrackFiles/* "${BURP_DIR}"
+                sudo chmod 644 "${BURP_DIR}${BURP}${BURP_Loder}"
                 # sudo chmod 755 /opt/BurpSuitePro/plugins
                 # sudo chmod 755 /opt/BurpSuitePro/config
                 sudo rm -rf CrackFiles
