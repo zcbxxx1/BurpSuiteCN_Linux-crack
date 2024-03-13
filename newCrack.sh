@@ -81,11 +81,11 @@ select fav in "${foods[@]}"; do
         echo "$fav ...."
         # tail -n +"$lines" "$0" >/tmp/sfx_archive.tar.gz
         # tar zxf sfx_archive.tar.gz
-        sudo cp -r CrackFile/* "${BURP_DIR}${BURP}"
+        sudo cp -r CrackFiles/* "${BURP_DIR}${BURP}"
         sudo chmod 644 "${BURP_DIR}${BURP}"ja-netfilter.jar
         # sudo chmod 755 /opt/BurpSuitePro/plugins
         # sudo chmod 755 /opt/BurpSuitePro/config
-        sudo rm -rf CrackFile
+        sudo rm -rf CrackFiles
         ls -lah "${BURP_DIR}${BURP}"
         ;;
     "运行注册机")
