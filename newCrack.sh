@@ -49,7 +49,6 @@ Link="https://portswigger-cdn.net/burp/releases/download?product=pro&version=$Ve
 Version=${Version//./_}
 BpName="burpsuite_pro_linux_v$Version.sh"
 
-
 PS3='输入您的选择: '
 foods=("官方下载" "官方安装" "准备破解补丁" "设置英文版" "设置汉化版" "开始破解" "完全卸载" "退出安装..")
 while true; do
@@ -128,15 +127,20 @@ while true; do
             ;;
         "完全卸载")
             echo "$fav ...."
-            echo "是否卸载 Burp (包括插件、个人配置等，将会被完全清除) [Y/n]"
-            read -r INSTALL_CHOICE
-            if [ "$INSTALL_CHOICE" = "n" ] || [ "$INSTALL_CHOICE" = "N" ]; then
-                echo "取消卸载！"
-                break
-            fi
-            if [ -z "$INSTALL_CHOICE" ] || [ "$INSTALL_CHOICE" = "Y" ] || [ "$INSTALL_CHOICE" = "y" ]; then
-                sudo "${BURP_DIR}"uninstall
-                sudo rm -rf "${BURP_DIR}"
+            if [ -f "${BURP_DIR}${BURP}" ]; then
+                echo "是否卸载 Burp (包括插件、个人配置等，将会被完全清除) [Y/n]"
+                read -r INSTALL_CHOICE
+                if [ "$INSTALL_CHOICE" = "n" ] || [ "$INSTALL_CHOICE" = "N" ]; then
+                    echo "取消卸载！"
+                    break
+                fi
+                if [ -z "$INSTALL_CHOICE" ] || [ "$INSTALL_CHOICE" = "Y" ] || [ "$INSTALL_CHOICE" = "y" ]; then
+                    sudo "${BURP_DIR}"uninstall
+                    sudo rm -rf "${BURP_DIR}"
+                    break
+                fi
+            else
+                echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
                 break
             fi
             ;;
