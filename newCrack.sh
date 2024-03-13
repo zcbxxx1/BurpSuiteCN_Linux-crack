@@ -44,7 +44,7 @@ while true; do
 done
 
 PS3='输入您的选择: '
-foods=("官方下载" "官方安装" "准备破解补丁" "运行注册机" "设置英文版" "设置汉化版" "退出安装..")
+foods=("官方下载" "官方安装" "准备破解补丁" "设置英文版" "设置汉化版" "开始破解" "退出安装..")
 while true; do
     select fav in "${foods[@]}"; do
         case $fav in
@@ -93,16 +93,6 @@ while true; do
                 break
             fi
             ;;
-        "运行注册机")
-            echo "$fav ...."
-            if [ -f "${BURP_DIR}${BURP}" ]; then
-                ("${BURP_DIR}"jre/bin/java --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED -jar "${BURP_DIR}${BURP_Loder}" -r) >/dev/null 2>&1 &
-                sleep 1s
-            else
-                echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
-                break
-            fi
-            ;;
         "设置英文版")
             echo "$fav ...."
             if [ -f "${BURP_DIR}${BURP}" ]; then
@@ -118,6 +108,17 @@ while true; do
             if [ -f "${BURP_DIR}${BURP}" ]; then
                 sudo sed -i '10，25d' "${BURP_DIR}"BurpSuitePro.vmoptions
                 sudo echo -e "--add-opens=java.desktop/javax.swing=ALL-UNNAMED\n--add-opens=java.base/java.lang=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED\n-javaagent:${BURP_Loder}=loader,han\n-Xmx2048m" | sudo tee -a "${BURP_DIR}"BurpSuitePro.vmoptions
+            else
+                echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
+                break
+            fi
+            ;;
+        "开始破解")
+            echo "$fav ...."
+            if [ -f "${BURP_DIR}${BURP}" ]; then
+                ("${BURP_DIR}"jre/bin/java --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED -jar "${BURP_DIR}${BURP_Loder}" -r) >/dev/null 2>&1 &
+                sleep 1s
+                "${BURP_DIR}${BURP}"
             else
                 echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
                 break
