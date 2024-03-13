@@ -66,42 +66,62 @@ select fav in "${foods[@]}"; do
             echo "检测到安装包，是否立即安装？[Y/n]"
             read -r INSTALL_CHOICE
             if [ "$INSTALL_CHOICE" = "n" ] || [ "$INSTALL_CHOICE" = "N" ]; then
-                echo "取消安装，脚本退出！"
-                exit 1
+                echo "取消安装！"
+                break
             fi
             if [ -z "$INSTALL_CHOICE" ] || [ "$INSTALL_CHOICE" = "Y" ] || [ "$INSTALL_CHOICE" = "y" ]; then
                 chmod +x "$BpName"
                 sudo ./"$BpName"
                 break
             fi
-            # wget "$Link" -O "$BpName" --quiet --show-progress
+        else
+            echo "未检测到安装包，请先下载。"
+            break
         fi
         ;;
     "准备破解补丁")
         echo "$fav ...."
-        # tail -n +"$lines" "$0" >/tmp/sfx_archive.tar.gz
-        # tar zxf sfx_archive.tar.gz
-        sudo cp -r CrackFiles/* "${BURP_DIR}${BURP}"
-        sudo chmod 644 "${BURP_DIR}${BURP}"ja-netfilter.jar
-        # sudo chmod 755 /opt/BurpSuitePro/plugins
-        # sudo chmod 755 /opt/BurpSuitePro/config
-        sudo rm -rf CrackFiles
-        ls -lah "${BURP_DIR}${BURP}"
+        if [ -f "${BURP_DIR}${BURP}" ]; then
+            sudo cp -r CrackFiles/* "${BURP_DIR}${BURP}"
+            sudo chmod 644 "${BURP_DIR}${BURP}"ja-netfilter.jar
+            # sudo chmod 755 /opt/BurpSuitePro/plugins
+            # sudo chmod 755 /opt/BurpSuitePro/config
+            sudo rm -rf CrackFiles
+            ls -lah "${BURP_DIR}${BURP}"
+        else
+            echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
+            break
+        fi
         ;;
     "运行注册机")
         echo "$fav ...."
-        ("${BURP_DIR}${BURP}"jre/bin/java --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED -jar "${BURP_DIR}${BURP}${BURP_Loder}" -r) >/dev/null 2>&1 &
-        sleep 1s
+        if [ -f "${BURP_DIR}${BURP}" ]; then
+            ("${BURP_DIR}${BURP}"jre/bin/java --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED -jar "${BURP_DIR}${BURP}${BURP_Loder}" -r) >/dev/null 2>&1 &
+            sleep 1s
+        else
+            echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
+            break
+        fi
         ;;
     "设置英文版")
         echo "$fav ...."
-        sudo sed -i '10,25d' "${BURP_DIR}${BURP}"BurpSuitePro.vmoptions
-        sudo echo -e "\n--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED\n-javaagent:${BURP_Loder}=loader\n-Xmx2048m" | sudo tee -a "${BURP_DIR}${BURP}"BurpSuitePro.vmoptions
+        if [ -f "${BURP_DIR}${BURP}" ]; then
+            sudo sed -i '10,25d' "${BURP_DIR}${BURP}"BurpSuitePro.vmoptions
+            sudo echo -e "\n--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED\n-javaagent:${BURP_Loder}=loader\n-Xmx2048m" | sudo tee -a "${BURP_DIR}${BURP}"BurpSuitePro.vmoptions
+        else
+            echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
+            break
+        fi
         ;;
     "设置汉化版")
         echo "$fav ...."
-        sudo sed -i '10，25d' "${BURP_DIR}${BURP}"BurpSuitePro.vmoptions
-        sudo echo -e "--add-opens=java.desktop/javax.swing=ALL-UNNAMED\n--add-opens=java.base/java.lang=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED\n-javaagent:${BURP_Loder}=loader,han\n-Xmx2048m" | sudo tee -a "${BURP_DIR}${BURP}"/BurpSuitePro.vmoptions
+        if [ -f "${BURP_DIR}${BURP}" ]; then
+            sudo sed -i '10，25d' "${BURP_DIR}${BURP}"BurpSuitePro.vmoptions
+            sudo echo -e "--add-opens=java.desktop/javax.swing=ALL-UNNAMED\n--add-opens=java.base/java.lang=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED\n--add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED\n-javaagent:${BURP_Loder}=loader,han\n-Xmx2048m" | sudo tee -a "${BURP_DIR}${BURP}"/BurpSuitePro.vmoptions
+        else
+            echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
+            break
+        fi
         ;;
     "退出安装..")
         echo "$fav ...."
