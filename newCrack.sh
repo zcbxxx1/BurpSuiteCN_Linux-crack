@@ -83,7 +83,7 @@ while true; do
             echo "$fav ...."
             if [ -f "${BURP_DIR}${BURP}" ]; then
                 sudo cp -r CrackFiles/* "${BURP_DIR}"
-                sudo chmod 644 "${BURP_DIR}${BURP}/${BURP_Loder}"
+                sudo chmod 644 "${BURP_DIR}${BURP_Loder}"
                 # sudo chmod 755 /opt/BurpSuitePro/plugins
                 # sudo chmod 755 /opt/BurpSuitePro/config
                 sudo rm -rf CrackFiles
@@ -96,7 +96,7 @@ while true; do
         "运行注册机")
             echo "$fav ...."
             if [ -f "${BURP_DIR}${BURP}" ]; then
-                ("${BURP_DIR}${BURP}"jre/bin/java --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED -jar "${BURP_DIR}${BURP}/${BURP_Loder}" -r) >/dev/null 2>&1 &
+                ("${BURP_DIR}${BURP}"jre/bin/java --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED -jar "${BURP_DIR}${BURP_Loder}" -r) >/dev/null 2>&1 &
                 sleep 1s
             else
                 echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
