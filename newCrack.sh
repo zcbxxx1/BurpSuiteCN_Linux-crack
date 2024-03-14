@@ -135,6 +135,8 @@ while true; do
                 ("${BURP_DIR}"jre/bin/java --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED -jar "${BURP_DIR}${BURP_Loder}" -r) >/dev/null 2>&1 &
                 sleep 1s
                 "${BURP_DIR}${BURP}"
+                echo "破解完成，后续正常从快捷方式或源程序启动即可"
+                exit 1
             else
                 echo "未检测到 ${BURP_DIR} 下的 BurpSuitePro 请先安装该程序。"
                 break
