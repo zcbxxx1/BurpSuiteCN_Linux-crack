@@ -25,6 +25,19 @@ BURP_DIR="/opt/BurpSuitePro/"
 BURP="BurpSuitePro"
 BURP_Loder="burpsuitloader-3.7.17-all.jar"
 
+files=(
+    "CrackFiles/${BURP_Loder}"
+    "CrackFiles/javassist.jar"
+)
+
+# 遍历文件列表进行检查
+for file in "${files[@]}"; do
+    if [ ! -f "$file" ]; then
+        echo "$file 不存在。破解文件不完整，程序退出..."
+        exit 1
+    fi
+done
+
 # 使用循环检测BurpSuitePro文件是否存在
 while true; do
     if [ -f "${BURP_DIR}${BURP}" ]; then
@@ -72,6 +85,7 @@ while true; do
                     break
                 fi
                 if [ -z "$INSTALL_CHOICE" ] || [ "$INSTALL_CHOICE" = "Y" ] || [ "$INSTALL_CHOICE" = "y" ]; then
+                    echo "正在安装，请确保不要修改默认安装路径！！！"
                     chmod +x "$BpName"
                     sudo ./"$BpName"
                     break
