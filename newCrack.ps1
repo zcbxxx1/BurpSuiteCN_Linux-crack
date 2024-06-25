@@ -18,6 +18,7 @@ Write-Host "+-------------------------------------------------------------------
 
 # 声明全局变量
 $global:BURP_DIR = "C:\Program Files\BurpSuitePro"
+$global:JRE = "jre\bin\java.exe"
 $global:BURP = "BurpSuitePro.exe"
 $global:BURP_Loader = "burpsuitloader-3.7.17-all.jar" # 修改为您的实际loader文件名
 
@@ -129,7 +130,8 @@ function Start-Crack {
     if (Test-Path (Join-Path $global:BURP_DIR $global:BURP)) {
         # 启动 Burp Loader
         Write-Host "启动 Burp Loader..."
-        Start-Process -FilePath "java" -ArgumentList "--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED -jar $(Join-Path $global:BURP_DIR $global:BURP_Loader)" -NoNewWindow
+        $javaPath = Join-Path $global:BURP_DIR $global:JRE
+        Start-Process -FilePath $javaPath -ArgumentList "--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED -jar $(Join-Path $global:BURP_DIR $global:BURP_Loader)" -NoNewWindow
 
         # 等待 Burp Loader 启动
         Start-Sleep -Seconds 5
