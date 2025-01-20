@@ -131,10 +131,13 @@ function Start-Crack {
         # 启动 Burp Loader
         Write-Host "启动 Burp Loader..."
         $javaPath = Join-Path $global:BURP_DIR $global:JRE
-        Start-Process -FilePath $javaPath -ArgumentList "--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED -jar $(Join-Path $global:BURP_DIR $global:BURP_Loader)" -NoNewWindow
+        $loaderPath = Join-Path $global:BURP_DIR $global:BURP_Loader
 
-        # 等待 Burp Loader 启动
-        Start-Sleep -Seconds 5
+        # 确保路径都加上引号
+        $javaArgs = "--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED -jar `"$loaderPath`""
+
+        # 启动 java 进程，路径加上引号
+        Start-Process -FilePath "`"$javaPath`"" -ArgumentList $javaArgs -NoNewWindow
 
         # 启动 Burp Suite 主程序
         $burpPath = Join-Path $global:BURP_DIR $global:BURP
