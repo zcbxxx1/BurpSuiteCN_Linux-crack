@@ -23,7 +23,7 @@ echo "+------------------------------------------------------------------------+
 # 初始化Burp Suite Pro的安装目录和文件名
 BURP_DIR="/opt/BurpSuitePro/"
 BURP="BurpSuitePro"
-BURP_Loder="burpsuitloader-3.7.17-all.jar"
+BURP_Loder="burpsuitloader-4.11.22-all.jar"
 
 files=(
     "CrackFiles/${BURP_Loder}"

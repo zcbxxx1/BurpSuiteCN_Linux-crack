@@ -20,7 +20,7 @@ Write-Host "+-------------------------------------------------------------------
 $global:BURP_DIR = "C:\Program Files\BurpSuitePro"
 $global:JRE = "jre\bin\java.exe"
 $global:BURP = "BurpSuitePro.exe"
-$global:BURP_Loader = "burpsuitloader-3.7.17-all.jar" # 修改为您的实际loader文件名
+$global:BURP_Loader = "burpsuitloader-4.11.22-all.jar" # 修改为您的实际loader文件名
 
 $files = @(
     "CrackFiles\$global:BURP_Loader",
